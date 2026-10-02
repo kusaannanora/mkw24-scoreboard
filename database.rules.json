@@ -1,0 +1,16 @@
+{
+  "rules": {
+    ".read": false,
+    ".write": false,
+    "rooms": {
+      "$room": {
+        ".read": "$room.matches(/^[a-f0-9]{32}$/)",
+        ".write": "auth != null && ((!data.exists() && newData.child('owner').val() === auth.uid) || (data.child('owner').val() === auth.uid && newData.child('owner').val() === auth.uid))",
+        ".validate": "newData.hasChildren(['owner', 'state'])",
+        "owner": { ".validate": "newData.isString() && newData.val() === auth.uid" },
+        "state": { ".validate": "newData.hasChildren(['version', 'title', 'size', 'teams', 'totalRaces', 'revision']) && newData.child('version').val() === 1 && newData.child('title').isString() && newData.child('title').val().length <= 100 && (newData.child('size').val() === 2 || newData.child('size').val() === 3 || newData.child('size').val() === 4) && newData.child('revision').isNumber()" },
+        "$other": { ".validate": false }
+      }
+    }
+  }
+}
