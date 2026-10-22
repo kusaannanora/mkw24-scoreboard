@@ -11,44 +11,6 @@
 - JSONバックアップ保存・読込。
 - 透過背景の配信表示。Firebase設定後は別PCへ即時同期。
 
-## 1. GitHubに新規作成して公開
-1. https://github.com/new を開く。
-2. Repository name に `mkw24-scoreboard` を入力し、Publicを選び、Create repository。
-3. 「uploading an existing file」または Add file → Upload files を開く。
-4. このZIPを解凍し、`mkw24`フォルダーの**中身**をアップロード。`index.html`がリポジトリ直下になるようにする。
-5. Commit changes。
-6. Settings → Pages → SourceでDeploy from a branch、Branchでmain、フォルダーは /(root) を選びSave。
-7. 公開後のURLは `https://あなたのユーザー名.github.io/mkw24-scoreboard/`。
-
-Firebaseが未設定でも、この時点で入力・集計を試せます。ファイルのダブルクリックではなく公開URLで開いてください。
-ローカルモードでの自動反映は同じブラウザーの別タブ限定です。XSplitや別PCでは次の設定が必要です。
-
-## 2. Firebaseで別PC同期を設定
-1. https://console.firebase.google.com/ で新しいプロジェクトを作成。
-2. Webアプリ（</>）を追加。表示された `firebaseConfig` の内容をコピー。
-3. `config.js` の `export const firebaseConfig = null;` を、取得したオブジェクトに置き換える。例:
-
-```js
-export const firebaseConfig = {
-  apiKey: "取得した値",
-  authDomain: "取得した値",
-  databaseURL: "取得した値",
-  projectId: "取得した値",
-  appId: "取得した値"
-};
-```
-
-4. Authentication → Sign-in method → 匿名を有効化。
-5. Authentication → Settings → Authorized domains に `あなたのユーザー名.github.io` を追加（スキームやパスは含めない）。
-6. Realtime Databaseを作成。Firestoreではありません。最初はロックモードで作成。
-7. Realtime DatabaseのRulesタブに `database.rules.json` の内容を貼り付けて公開。**全員書き込み可能なテストモードのままにしない。**
-8. Realtime Databaseに表示されたURLを `config.js` の `databaseURL` に設定。
-9. 更新した `config.js` をGitHubにアップロード。反映後、集計画面を再読込。
-10. 「新しい大会を作成」を押す。大会IDを含む集計URLが開く。
-
-Web用firebaseConfigは公開用の接続設定です。サービスアカウントの秘密鍵や認証トークンをコードに書かないでください。
-料金・利用上限はFirebaseの現行プランを確認してください。このアプリは結果の確定時だけ送信し、順位入力途中のデータは送信しません。
-
 ## 3. 集計と配信
 1. チーム人数を選び、タグ・色・大会名・予定レース数を設定し「設定を保存・配信に反映」。
 2. レースの1位から順にチームタグをクリック。
