@@ -45,8 +45,19 @@ export function parseRoster(text) {
       if(codes.has(code))throw Error('同じフレンドコードが複数回あります。組分けを確認してください。');
       codes.add(code);players.push(name);end=match.index+match[0].length;
     }
-    if(clean(line.slice(end)))throw Error(`${index+1}行目の末尾に読み取れない文字があります。1行に1チームずつ貼り付けてください。`);
-    teams.push({players,tag:suggestTag(players)});
+    // An explicitly supplied team tag takes precedence over substring inference.
+    // The trailing 【previous-round rank】 is metadata, never a player or a score.
+    const tail=clean(line.slice(end));
+    let explicitTag=null;
+    if(tail){
+      const metadata=tail.match(/^(?:[(（]([^()（）\r\n]+)[)）]\s*)?(?:【\s*([0-9０-９]+)\s*】)?$/u);
+      if(!metadata||(!metadata[1]&&!metadata[2]))throw Error(`${index+1}行目の末尾を読み取れませんでした。「（チームタグ）【前回順位】」形式を確認してください。`);
+      if(metadata[1]!==undefined){
+        explicitTag=metadata[1].trim();
+        if(!explicitTag||explicitTag.length>24)throw Error(`${index+1}行目のチームタグは1〜24文字で指定してください。`);
+      }
+    }
+    teams.push({players,tag:explicitTag??suggestTag(players)});
   }
   if(!teams.length)throw Error('チームを読み取れませんでした。');
   const size=teams[0].players.length;
