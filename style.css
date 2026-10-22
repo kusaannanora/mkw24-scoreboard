@@ -14,3 +14,5 @@ body.race-overlay{background:transparent;overflow:hidden}body.race-overlay #app{
 body.race-overlay .score-row{grid-template-columns:30px minmax(0,1fr) 54px}body.race-overlay .score-row .rank{font-size:19px}body.race-overlay .qualification-line{gap:0}
 /* Race display: 90% transparent background; text and team colors remain opaque. */
 body.race-overlay .broadcast{background:rgba(8,17,29,.10);box-shadow:none}body.race-overlay .score-row{background:transparent}body.race-overlay .score-row.rank-up,body.race-overlay .score-row.rank-down{animation:none}
+/* Equal 90%-transparent backgrounds for every race standings row, including first place. */
+body.race-overlay .broadcast{background:transparent}body.race-overlay .broadcast-header{background:rgba(8,17,29,.10);border-radius:3px}body.race-overlay .broadcast .score-row,body.race-overlay .broadcast .score-row:first-of-type{background:rgba(8,17,29,.10)}
