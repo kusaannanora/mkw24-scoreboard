@@ -4,9 +4,9 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>MKW24 — レース中の集計</title>
-  <link rel="stylesheet" href="style.css?v=coin-hud-align-6">
+  <link rel="stylesheet" href="style.css?v=coin-hud-opacity-7">
   <style>
-    /* Keep the approved placement, dimensions and transparency. */
+    /* Keep the approved placement and dimensions. */
     body.race-overlay .broadcast {
       left: 48.75px;
       width: 340.3125px;
@@ -19,7 +19,7 @@
     body.race-overlay .broadcast-header,
     body.race-overlay .broadcast .score-row,
     body.race-overlay .broadcast .score-row:first-of-type {
-      background: rgba(28, 28, 28, .65);
+      background: rgba(28, 28, 28, .70);
       border: 4px solid rgba(65, 65, 65, .85);
       border-radius: 16px;
       box-shadow:
@@ -59,7 +59,7 @@
     }
     body.race-overlay .broadcast .score-row .tagname {
       font-size: 40px;
-      line-height: 1.2;
+      line-height: 1;
       overflow: visible;
       font-weight: 800;
     }
@@ -70,7 +70,7 @@
     }
     body.race-overlay .broadcast:has(.score-row:nth-of-type(n+12)) .score-row .tagname {
       font-size: 34px;
-      line-height: 1.15;
+      line-height: 1;
     }
   </style>
 </head>
