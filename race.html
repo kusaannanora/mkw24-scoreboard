@@ -4,10 +4,12 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>MKW24 — レース中の集計</title>
-  <link rel="stylesheet" href="style.css?v=coin-hud-name-5">
+  <link rel="stylesheet" href="style.css?v=coin-hud-align-6">
   <style>
     /* Keep the approved placement, dimensions and transparency. */
     body.race-overlay .broadcast {
+      left: 48.75px;
+      width: 340.3125px;
       background: transparent;
       border: none;
       box-shadow: none;
@@ -56,8 +58,9 @@
       min-height: 56px;
     }
     body.race-overlay .broadcast .score-row .tagname {
-      font-size: 46px;
-      line-height: 1;
+      font-size: 40px;
+      line-height: 1.2;
+      overflow: visible;
       font-weight: 800;
     }
     /* Keep twelve teams below the item display and above the coin HUD. */
@@ -66,7 +69,8 @@
       min-height: 48px;
     }
     body.race-overlay .broadcast:has(.score-row:nth-of-type(n+12)) .score-row .tagname {
-      font-size: 38px;
+      font-size: 34px;
+      line-height: 1.15;
     }
   </style>
 </head>
